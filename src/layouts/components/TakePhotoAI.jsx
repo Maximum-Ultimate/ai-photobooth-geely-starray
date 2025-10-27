@@ -13,6 +13,7 @@ import titleCamera from "../../assets/img/photoLabel.png";
 
 import buttonBase from "../../assets/img/btnMainIdle.webp";
 import buttonBaseClicked from "../../assets/img/btnMainActive.webp";
+import { CircleChevronLeft } from "lucide-solid";
 // import wsContext from "../../utils/wsContext";
 
 export default function TakePhotoAI() {
@@ -342,7 +343,7 @@ export default function TakePhotoAI() {
           {!isCaptured() ? (
             <div class="flex flex-row justify-center items-center gap-12 w-full">
               {/* 🔴 Menu Utama */}
-              <button
+              {/* <button
                 onMouseDown={() => setIsActive(true)}
                 onMouseUp={() => setTimeout(() => setIsActive(false), 300)}
                 onMouseLeave={() => setIsActive(false)}
@@ -365,7 +366,19 @@ export default function TakePhotoAI() {
                   "background-repeat": "no-repeat",
                 }}
               >
-                {/* Kalau mau tambahin ikon panah di tengah, bisa taruh sini */}
+              </button> */}
+
+              <button
+                onClick={() => {
+                  navigate("/");
+                  buttonSound.play();
+                }}
+                disabled={isCounting()}
+                class={`btn-geely-square ${
+                  isCounting() ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                <CircleChevronLeft size={80} strokeWidth={3} />
               </button>
 
               {/* 🟢 Tombol Ambil Foto */}

@@ -239,4 +239,13 @@ code {
            shadow-[4px_4px_8px_#b4b9bf,_-4px_-4px_8px_#f5f8fb]
            active:from-[#7188a0] active:to-[#3f4a55] active:shadow-inner active:text-white;
   }
+
+  /* 🔵 versi kotak — buat tombol dengan ikon (misal back, next, dsb) */
+  .btn-geely-square {
+    @apply flex items-center justify-center w-32 h-32 text-black rounded-[25px]
+           transition-all duration-300 active:scale-95
+           bg-gradient-to-b from-[#d2d8e1] to-[#76849b]
+           shadow-[4px_4px_8px_#b4b9bf,_-4px_-4px_8px_#f5f8fb]
+           active:from-[#7188a0] active:to-[#3f4a55] active:shadow-inner active:text-white;
+  }
 }
