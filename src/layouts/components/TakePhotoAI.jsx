@@ -106,25 +106,19 @@ export default function TakePhotoAI() {
 
     try {
       // Trigger pengambilan foto di backend
-      await fetch(
-        "https://nsg61z1g-3111.asse.devtunnels.ms/takephoto-portrait",
-        {
-          headers: NGROK_HEADERS,
-        }
-      );
+      await fetch("http://localhost:8000/takephoto-portrait", {
+        headers: NGROK_HEADERS,
+      });
 
       // Ambil path ke foto preview dari backend
-      const res = await fetch(
-        "https://nsg61z1g-3111.asse.devtunnels.ms/getpreviewpath",
-        {
-          headers: NGROK_HEADERS,
-        }
-      );
+      const res = await fetch("http://localhost:8000/getpreviewpath", {
+        headers: NGROK_HEADERS,
+      });
       const data = await res.json();
       console.log("Data:", data);
 
       if (data?.photo) {
-        const ngrokPhotoPath = `https://nsg61z1g-3111.asse.devtunnels.ms/${data.photo}`;
+        const ngrokPhotoPath = `http://localhost:8000/${data.photo}`;
         // Ambil foto sebagai blob untuk melewati interstitial ngrok saat menampilkan gambar
         const blobUrl = await fetchImageAsBlobUrl(ngrokPhotoPath);
         if (blobUrl) {
@@ -160,7 +154,7 @@ export default function TakePhotoAI() {
     setIsLoading(true);
 
     try {
-      await fetch("https://nsg61z1g-3111.asse.devtunnels.ms/confirmphoto", {
+      await fetch("http://localhost:8000/confirmphoto", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +162,7 @@ export default function TakePhotoAI() {
         },
         body: JSON.stringify({ option: 2 }),
       });
-      await fetch("https://nsg61z1g-3111.asse.devtunnels.ms/swapface", {
+      await fetch("http://localhost:8000/swapface", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +170,7 @@ export default function TakePhotoAI() {
         },
         body: JSON.stringify({ option: modelId, gender: genderId }),
       });
-      // await fetch("https://nsg61z1g-3111.asse.devtunnels.ms/framing", {
+      // await fetch("http://localhost:8000/framing", {
       //   method: "POST",
       //   headers: {
       //     "Content-Type": "application/json",
@@ -184,19 +178,16 @@ export default function TakePhotoAI() {
       //   },
       //   body: JSON.stringify({ option: 3 }),
       // });
-      await fetch(
-        "https://nsg61z1g-3111.asse.devtunnels.ms/uploadconfirmphoto",
-        {
-          headers: NGROK_HEADERS,
-        }
-      );
+      await fetch("http://localhost:8000/uploadconfirmphoto", {
+        headers: NGROK_HEADERS,
+      });
 
       // Ambil hasil foto dan QR code secara paralel
       const [photoResponse, qrResponse] = await Promise.all([
-        fetch("https://nsg61z1g-3111.asse.devtunnels.ms/getresultpath", {
+        fetch("http://localhost:8000/getresultpath", {
           headers: NGROK_HEADERS,
         }),
-        fetch("https://nsg61z1g-3111.asse.devtunnels.ms/getqrurl", {
+        fetch("http://localhost:8000/getqrurl", {
           headers: NGROK_HEADERS,
         }),
       ]);
@@ -205,7 +196,7 @@ export default function TakePhotoAI() {
       const qrData = await qrResponse.json();
 
       if (photoData?.photo) {
-        const ngrokResultPhotoPath = `https://nsg61z1g-3111.asse.devtunnels.ms/${photoData.photo}`;
+        const ngrokResultPhotoPath = `http://localhost:8000/${photoData.photo}`;
         // Ambil foto hasil sebagai blob untuk melewati interstitial ngrok saat menampilkan gambar
         const blobUrl = await fetchImageAsBlobUrl(ngrokResultPhotoPath);
         if (blobUrl) {
@@ -239,7 +230,7 @@ export default function TakePhotoAI() {
 
     try {
       const printResponse = await fetch(
-        "https://nsg61z1g-3111.asse.devtunnels.ms/printphoto-portrait",
+        "http://localhost:8000/printphoto-portrait",
         {
           method: "GET",
           headers: NGROK_HEADERS,
@@ -279,10 +270,14 @@ export default function TakePhotoAI() {
   return (
     <div class="w-full flex flex-col items-center justify-center">
       <p
-        class="absolute top-60 text-[75px] text-center tracking-widest leading-20 text-white"
+        class="absolute top-60 text-[75px] px-20 text-center tracking-widest leading-20 text-white"
         style={{ "font-family": "GeelyBold" }}
       >
-        <span class="uppercase">GET READY</span>
+        <Show when={!countdown()}>
+          <span class="uppercase">
+            {isCaptured ? "GET READY" : "DO YOU WANT TO USE THIS PHOTO?"}
+          </span>
+        </Show>
       </p>
       <div
         class={`flex flex-col h-screen w-full justify-center items-center gap-10 shadow-none px-5 ${styles.fadeIn}`}
@@ -303,7 +298,7 @@ export default function TakePhotoAI() {
                 // Contoh: src="http://localhost:5000/api/stream-portrait"
                 // Backend kamu akan mengambil stream dari ngrok dengan header bypass
                 // dan meneruskannya ke frontend.
-                src="https://nsg61z1g-3111.asse.devtunnels.ms/stream-portrait" // <-- GANTI INI DENGAN URL PROXY BACKEND KAMU
+                src="http://localhost:8000/stream-portrait" // <-- GANTI INI DENGAN URL PROXY BACKEND KAMU
                 alt="Camera Preview"
                 class="w-[550px] h-full object-cover rounded-[40px] border-2 border-white"
               />
