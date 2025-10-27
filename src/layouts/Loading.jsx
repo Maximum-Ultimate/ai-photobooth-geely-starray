@@ -1,5 +1,5 @@
 import { createSignal, onMount } from "solid-js";
-import logo from "../assets/img/asusLogo.webp";
+import logo from "../assets/img/logoGeely.png";
 import styles from "../App.module.css";
 
 function Loading(background) {
@@ -20,7 +20,7 @@ function Loading(background) {
         <img
           src={logo}
           alt="Logo"
-          class="w-40 sm:w-56 md:w-72 lg:w-80 xl:w-96 mb-12 rounded-lg object-contain"
+          class="w-52 sm:w-64 md:w-80 lg:w-96 mb-12 rounded-lg object-contain invert"
         />
         <p
           class="text-[65px] text-[#FFB848] text-center tracking-widest leading-20 uppercase"

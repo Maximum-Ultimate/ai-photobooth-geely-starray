@@ -3,7 +3,6 @@ import { Router, Route } from "@solidjs/router";
 import Home from "./layouts/components/Home";
 import Loading from "./layouts/Loading";
 import NotFoundPage from "./layouts/NotFoundPage";
-import backgroundPhotobooth from "./assets/img/background.png";
 import bgmPhotobooth from "./assets/sfx/bgm.mp3";
 import TakePhotoAI from "./layouts/components/TakePhotoAI";
 

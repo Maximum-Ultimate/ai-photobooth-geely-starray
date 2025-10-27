@@ -1,14 +1,13 @@
 @import "tailwindcss";
-@import "swiper/css";
-@import "swiper/css/effect-coverflow";
 
-body {
+html,
+body,
+#root {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 code {
@@ -17,11 +16,56 @@ code {
 }
 
 @font-face {
-  font-family: "AsusFontTitle";
-  src: url("./assets/fonts/TTNorms-Bold.otf") format("opentype");
+  font-family: "GeelyBold";
+  src: url("./assets/fonts/GEELYBold.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Geely";
+  src: url("./assets/fonts/geelyLight.ttf") format("truetype");
+  font-weight: 300 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "InterRegular";
+  src: url("./assets/fonts/Inter2/Inter-Regular.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "InterSemiBold";
+  src: url("./assets/fonts/Inter2/Inter-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "InterBold";
+  src: url("./assets/fonts/Inter2/Inter-Bold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@keyframes blueGlow {
+  0% {
+    box-shadow: 0 0 8px #b3ecff, 0 0 16px #b3ecff, 0 0 24px #b3ecff;
+  }
+  50% {
+    box-shadow: 0 0 16px #b3ecff, 0 0 24px #b3ecff, 0 0 40px #b3ecff;
+  }
+  100% {
+    box-shadow: 0 0 8px #b3ecff, 0 0 16px #b3ecff, 0 0 24px #b3ecff;
+  }
+}
+
+.glow-animate {
+  animation: blueGlow 1.5s ease-in-out infinite;
+}
+
 
 .loader {
   width: 100px;
@@ -82,7 +126,7 @@ code {
     filter: drop-shadow(0 0 4px rgba(0, 128, 255, 0.4));
   }
   50% {
-    filter: drop-shadow(0 0 12px rgb(255, 247, 0));
+    filter: drop-shadow(0 0 12px rgb(0, 191, 255));
   }
   100% {
     filter: drop-shadow(0 0 4px rgba(0, 128, 255, 0.4));

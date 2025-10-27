@@ -8,7 +8,7 @@ import QRComponent from "../helper/QRComponent";
 
 import buttonBase from "../../assets/img/btnMainIdle.webp";
 import buttonBaseClicked from "../../assets/img/btnMainActive.webp";
-import wsContext from "../../utils/wsContext";
+// import wsContext from "../../utils/wsContext";
 
 export default function TakePhotoAI() {
   // photoUrl dan photoPreview sekarang akan menyimpan Blob URL (mis. blob:http://localhost:3000/...)
@@ -80,7 +80,7 @@ export default function TakePhotoAI() {
 
   const handleCapture = async () => {
     setIsActive(true);
-    wsContext.sendMessage("capture");
+    // wsContext.sendMessage("capture");
 
     setTimeout(() => {
       setIsActive(false);
@@ -251,7 +251,7 @@ export default function TakePhotoAI() {
 
   const takeNewPhoto = () => {
     buttonSound.play();
-    wsContext.sendMessage("back");
+    // wsContext.sendMessage("back");
 
     if (photoPreview()) URL.revokeObjectURL(photoPreview()); // Bersihkan Blob URL lama
     setPhotoPreview(null);

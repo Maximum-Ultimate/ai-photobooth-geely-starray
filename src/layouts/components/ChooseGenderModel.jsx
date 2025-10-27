@@ -1,23 +1,25 @@
 import { createSignal } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 
-import male1 from "../../assets/models/maleModel1.png";
-import male2 from "../../assets/models/maleModel2.png";
+import male1 from "../../assets/models/male1.jpg";
+import male2 from "../../assets/models/male2.jpg";
+import male3 from "../../assets/models/male3.jpg";
+import male4 from "../../assets/models/male4.jpg";
 
-import female1 from "../../assets/models/femaleModel1.png";
-import female2 from "../../assets/models/femaleModel2.png";
+import female1 from "../../assets/models/female1.jpg";
+import female2 from "../../assets/models/female2.jpg";
 
 import { ArrowLeft, ArrowRight, Mars, Triangle, Venus } from "lucide-solid";
-import menGenderBase from "../../assets/img/btnMaleIdle.webp";
-import menGenderBaseClicked from "../../assets/img/btnMaleActive.webp";
-import womenGenderBase from "../../assets/img/btnFemaleIdle.webp";
-import womenGenderBaseClicked from "../../assets/img/btnFemaleActive.webp";
-// import rightArrow from "../../assets/img/rightArrow.webp";
-// import leftArrow from "../../assets/img/leftArrow.webp";
+import menGenderBase from "../../assets/img/btnMaleIdle.png";
+import menGenderBaseClicked from "../../assets/img/btnMaleActive.png";
+import womenGenderBase from "../../assets/img/btnFemaleIdle.png";
+import womenGenderBaseClicked from "../../assets/img/btnFemaleActive.png";
+import rightArrow from "../../assets/img/rightArrow.png";
+import leftArrow from "../../assets/img/leftArrow.png";
 import sfxButton from "../../assets/sfx/sfxbtn.wav";
 import styles from "../../App.module.css";
 
-import logoAsus from "../../assets/img/asusLogo.webp";
+import geelyLogo from "../../assets/img/geelyLogo.webp";
 
 export default function ChooseGenderModel() {
   const navigate = useNavigate();
@@ -35,6 +37,8 @@ export default function ChooseGenderModel() {
   const maleModels = [
     { id: 1, src: male1, alt: "Male Model 1" },
     { id: 2, src: male2, alt: "Male Model 2" },
+    { id: 3, src: male3, alt: "Male Model 3" },
+    { id: 4, src: male4, alt: "Male Model 4" },
   ];
 
   const femaleModels = [
@@ -67,7 +71,7 @@ export default function ChooseGenderModel() {
   const handleModelSelect = (model) => {
     const sound = buttonSound.cloneNode();
     sound.play();
-    
+
     setTimeout(() => {
       navigate(`/take-photo-ai?gender=${selectedGender()}&modelId=${model.id}`);
     }, 800);
@@ -114,30 +118,28 @@ export default function ChooseGenderModel() {
 
   return (
     <div class="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden text-white">
-      <img
+      {/* <img
         class={`absolute top-[380px] scale-90 ${styles.fadeIn}`}
         src={logoAsus}
         alt=""
-      />
+      /> */}
       <div
         class={`flex flex-col items-center px-5 gap-20 ${styles.fadeIn}`}
-        style={{ "font-family": "Conthrax" }}
+        style={{ "font-family": "Geely" }}
       >
         {/* pilihan gender */}
         {selectedGender() === null ? (
           <div class="flex flex-col gap-32 mt-[-250px] text-center">
             <p
-              class="text-[55px] text-[#FFB848] text-center tracking-widest leading-20"
-              style={{ "font-family": "AsusFontTitle" }}
+              class="text-[55px] text-center tracking-widest leading-20"
+              style={{ "font-family": "GeelyBold" }}
             >
-              <span class="text-gold-3d shine uppercase">
-                Pilih Jenis Kelamin
-              </span>
+              <span class="uppercase">Select Your Gender</span>
             </p>
             <div class="flex gap-24 justify-center">
               <button
                 onClick={() => handleGenderClick("male")}
-                class="flex flex-col w-[320px] h-[320px] items-center justify-center rounded-2xl hover:scale-110 active:scale-90 duration-300 transition-all"
+                class="flex flex-col w-[400px] h-[400px] items-center justify-center rounded-2xl hover:scale-110 active:scale-90 duration-300 transition-all"
                 style={{
                   "background-image": `url(${
                     !isMaleActive() ? menGenderBase : menGenderBaseClicked
@@ -149,7 +151,7 @@ export default function ChooseGenderModel() {
 
               <button
                 onClick={() => handleGenderClick("female")}
-                class="flex flex-col w-[320px] h-[320px] items-center justify-center rounded-2xl hover:scale-110 active:scale-90 duration-300 transition-all"
+                class="flex flex-col w-[400px] h-[400px] items-center justify-center rounded-2xl hover:scale-110 active:scale-90 duration-300 transition-all"
                 style={{
                   "background-image": `url(${
                     !isFemaleActive() ? womenGenderBase : womenGenderBaseClicked
@@ -162,36 +164,34 @@ export default function ChooseGenderModel() {
           </div>
         ) : (
           // bagian slider model
-          <div class="relative w-full max-w-[2000px] h-screen flex flex-col items-center justify-center text-black">
+          <div class="relative w-full max-w-[2000px] h-screen flex flex-col items-center justify-center">
             {/* Judul */}
             <p
-              class="absolute top-[540px] text-[55px] text-[#FFB848] text-center tracking-widest leading-20"
-              style={{ "font-family": "AsusFontTitle" }}
+              class="absolute top-[350px] text-[55px] text-center tracking-widest leading-20"
+              style={{ "font-family": "GeelyBold" }}
             >
-              <span class="text-gold-3d shine uppercase">
-                Pilih Karakter Mu
-              </span>
+              <span class="uppercase">Pilih Karakter Mu</span>
             </p>
             {/* Wrapper foto + tombol */}
-            <div class="relative flex items-center justify-center w-full mt-[300px]">
+            <div class="relative flex items-center justify-center w-full ">
               {/* Tombol kiri */}
               <button
                 onClick={prevSlide}
-                class="absolute left-[20px] top-[750px] -translate-y-1/2 
-         w-[130px] h-[209px] transition-transform z-20
+                class="absolute left-[20px] top-[850px] -translate-y-1/2 
+         w-[70px] h-[100px] transition-transform z-20
          hover:scale-110 active:scale-90 animate-glow"
-                // style={{
-                //   "background-image": `url(${leftArrow})`,
-                //   "background-size": "cover",
-                //   "background-position": "center",
-                //   filter: "drop-shadow(0 0 8px rgba(255, 0, 0, 0.6))",
-                // }}
+                style={{
+                  "background-image": `url(${leftArrow})`,
+                  "background-size": "cover",
+                  "background-position": "center",
+                  filter: "drop-shadow(0 0 8px rgba(255, 0, 0, 0.6))",
+                }}
               >
-                <Triangle class="rotate-270 text-[#FFB848]" size={100} />
+                {/* <Triangle class="rotate-270 text-[#FFB848]" size={100} /> */}
               </button>
 
               <div
-                class="relative flex items-center justify-center px-52 w-[860px] h-[1800px] overflow-hidden"
+                class="relative flex items-center justify-center w-[860px] h-[1800px] overflow-hidden"
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
@@ -243,17 +243,17 @@ export default function ChooseGenderModel() {
               {/* Tombol kanan */}
               <button
                 onClick={nextSlide}
-                class="absolute -right-[8px] top-[750px] -translate-y-1/2 
-         w-[130px] h-[209px] text-4xl transition-transform z-20 
+                class="absolute -right-[-30px] top-[850px] -translate-y-1/2 
+         w-[70px] h-[100px] text-4xl transition-transform z-20 
          hover:scale-110 active:scale-90 animate-glow"
-                // style={{
-                //   "background-image": `url(${rightArrow})`,
-                //   "background-size": "cover",
-                //   "background-position": "center",
-                //   filter: "drop-shadow(0 0 8px rgba(255, 0, 0, 0.6))",
-                // }}
+                style={{
+                  "background-image": `url(${rightArrow})`,
+                  "background-size": "cover",
+                  "background-position": "center",
+                  filter: "drop-shadow(0 0 8px rgba(255, 0, 0, 0.6))",
+                }}
               >
-                <Triangle class="rotate-90 text-[#FFB848]" size={100} />
+                {/* <Triangle class="rotate-90 text-[#FFB848]" size={100} /> */}
               </button>
             </div>
           </div>
