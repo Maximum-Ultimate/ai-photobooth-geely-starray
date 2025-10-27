@@ -6,6 +6,11 @@ import sfxButton from "../../assets/sfx/sfxbtn.wav";
 import sfxCountdown from "../../assets/sfx/sfxcountdown.wav";
 import QRComponent from "../helper/QRComponent";
 
+import btnBackIdle from "../../assets/img/btnBackIdle.webp";
+import btnBackActive from "../../assets/img/btnBackActive.webp";
+
+import titleCamera from "../../assets/img/photoLabel.png";
+
 import buttonBase from "../../assets/img/btnMainIdle.webp";
 import buttonBaseClicked from "../../assets/img/btnMainActive.webp";
 // import wsContext from "../../utils/wsContext";
@@ -101,19 +106,25 @@ export default function TakePhotoAI() {
 
     try {
       // Trigger pengambilan foto di backend
-      await fetch("http://localhost:8000/takephoto-portrait", {
-        headers: NGROK_HEADERS,
-      });
+      await fetch(
+        "https://nsg61z1g-3111.asse.devtunnels.ms/takephoto-portrait",
+        {
+          headers: NGROK_HEADERS,
+        }
+      );
 
       // Ambil path ke foto preview dari backend
-      const res = await fetch("http://localhost:8000/getpreviewpath", {
-        headers: NGROK_HEADERS,
-      });
+      const res = await fetch(
+        "https://nsg61z1g-3111.asse.devtunnels.ms/getpreviewpath",
+        {
+          headers: NGROK_HEADERS,
+        }
+      );
       const data = await res.json();
       console.log("Data:", data);
 
       if (data?.photo) {
-        const ngrokPhotoPath = `http://localhost:8000/${data.photo}`;
+        const ngrokPhotoPath = `https://nsg61z1g-3111.asse.devtunnels.ms/${data.photo}`;
         // Ambil foto sebagai blob untuk melewati interstitial ngrok saat menampilkan gambar
         const blobUrl = await fetchImageAsBlobUrl(ngrokPhotoPath);
         if (blobUrl) {
@@ -149,7 +160,7 @@ export default function TakePhotoAI() {
     setIsLoading(true);
 
     try {
-      await fetch("http://localhost:8000/confirmphoto", {
+      await fetch("https://nsg61z1g-3111.asse.devtunnels.ms/confirmphoto", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -157,7 +168,7 @@ export default function TakePhotoAI() {
         },
         body: JSON.stringify({ option: 2 }),
       });
-      await fetch("http://localhost:8000/swapface", {
+      await fetch("https://nsg61z1g-3111.asse.devtunnels.ms/swapface", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -165,7 +176,7 @@ export default function TakePhotoAI() {
         },
         body: JSON.stringify({ option: modelId, gender: genderId }),
       });
-      // await fetch("http://localhost:8000/framing", {
+      // await fetch("https://nsg61z1g-3111.asse.devtunnels.ms/framing", {
       //   method: "POST",
       //   headers: {
       //     "Content-Type": "application/json",
@@ -173,16 +184,19 @@ export default function TakePhotoAI() {
       //   },
       //   body: JSON.stringify({ option: 3 }),
       // });
-      await fetch("http://localhost:8000/uploadconfirmphoto", {
-        headers: NGROK_HEADERS,
-      });
+      await fetch(
+        "https://nsg61z1g-3111.asse.devtunnels.ms/uploadconfirmphoto",
+        {
+          headers: NGROK_HEADERS,
+        }
+      );
 
       // Ambil hasil foto dan QR code secara paralel
       const [photoResponse, qrResponse] = await Promise.all([
-        fetch("http://localhost:8000/getresultpath", {
+        fetch("https://nsg61z1g-3111.asse.devtunnels.ms/getresultpath", {
           headers: NGROK_HEADERS,
         }),
-        fetch("http://localhost:8000/getqrurl", {
+        fetch("https://nsg61z1g-3111.asse.devtunnels.ms/getqrurl", {
           headers: NGROK_HEADERS,
         }),
       ]);
@@ -191,7 +205,7 @@ export default function TakePhotoAI() {
       const qrData = await qrResponse.json();
 
       if (photoData?.photo) {
-        const ngrokResultPhotoPath = `http://localhost:8000/${photoData.photo}`;
+        const ngrokResultPhotoPath = `https://nsg61z1g-3111.asse.devtunnels.ms/${photoData.photo}`;
         // Ambil foto hasil sebagai blob untuk melewati interstitial ngrok saat menampilkan gambar
         const blobUrl = await fetchImageAsBlobUrl(ngrokResultPhotoPath);
         if (blobUrl) {
@@ -225,7 +239,7 @@ export default function TakePhotoAI() {
 
     try {
       const printResponse = await fetch(
-        "http://localhost:8000/printphoto-portrait",
+        "https://nsg61z1g-3111.asse.devtunnels.ms/printphoto-portrait",
         {
           method: "GET",
           headers: NGROK_HEADERS,
@@ -263,9 +277,15 @@ export default function TakePhotoAI() {
   };
 
   return (
-    <div class="w-full flex flex-col items-center justify-center text-[#000511]">
+    <div class="w-full flex flex-col items-center justify-center">
+      <p
+        class="absolute top-60 text-[75px] text-center tracking-widest leading-20 text-white"
+        style={{ "font-family": "GeelyBold" }}
+      >
+        <span class="uppercase">GET READY</span>
+      </p>
       <div
-        class={`flex flex-col items-center shadow-none px-5 ${styles.fadeIn}`}
+        class={`flex flex-col h-screen w-full justify-center items-center gap-10 shadow-none px-5 ${styles.fadeIn}`}
         style={{ "font-family": "InterSemiBold" }}
       >
         {/* <img
@@ -273,35 +293,36 @@ export default function TakePhotoAI() {
           alt="Logo"
           class="w-[300px] mt-40 mb-10 opacity-100"
         /> */}
-        {/* <p class="text-center text-[40px] bg-gradient-to-r from-[#e9ff17] to-[#32f1fe] bg-clip-text text-transparent px-5 py-4">
-          AI Photobooth
-        </p> */}
-
-        <div class="w-[550px] h-auto flex justify-center">
+        <div class="w-[550px] h-auto flex items-center justify-center">
           {!isCaptured() ? (
-            <img
-              id="camera-stream"
-              // PENTING: Untuk live camera stream ini, kamu HARUS membuat proxy di backend kamu.
-              // Ganti URL ini dengan endpoint proxy di backend kamu.
-              // Contoh: src="http://localhost:5000/api/stream-portrait"
-              // Backend kamu akan mengambil stream dari ngrok dengan header bypass
-              // dan meneruskannya ke frontend.
-              src="http://localhost:8000/stream-portrait" // <-- GANTI INI DENGAN URL PROXY BACKEND KAMU
-              alt="Camera Preview"
-              class="w-[550px] h-full object-cover rounded-lg border border-white/20"
-            />
+            <div class="flex justify-center items-center">
+              <img
+                id="camera-stream"
+                // PENTING: Untuk live camera stream ini, kamu HARUS membuat proxy di backend kamu.
+                // Ganti URL ini dengan endpoint proxy di backend kamu.
+                // Contoh: src="http://localhost:5000/api/stream-portrait"
+                // Backend kamu akan mengambil stream dari ngrok dengan header bypass
+                // dan meneruskannya ke frontend.
+                src="https://nsg61z1g-3111.asse.devtunnels.ms/stream-portrait" // <-- GANTI INI DENGAN URL PROXY BACKEND KAMU
+                alt="Camera Preview"
+                class="w-[550px] h-full object-cover rounded-[40px] border-2 border-white"
+              />
+              <Show when={!countdown()}>
+                <img class="absolute" src={titleCamera} alt="Camera Title" />
+              </Show>
+            </div>
           ) : (
             <img
               src={photoPreview() || photoUrl()} // photoUrl dan photoPreview sekarang adalah Blob URLs
               alt="Captured"
-              class={`w-[550px] h-auto object-cover rounded-md border border-white/20 ${
+              class={`w-[550px] h-auto object-cover rounded-[44px] border-2 border-white ${
                 isLoading() ? "blur-sm" : ""
               }`}
             />
           )}
 
           {countdown() && (
-            <div class="absolute text-white text-[250px] font-bold z-10 mt-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-lg">
+            <div class="absolute text-white text-[250px] font-bold z-10 mt-40 top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-lg">
               {countdown()}
             </div>
           )}
@@ -322,24 +343,37 @@ export default function TakePhotoAI() {
             </div>
           </div>
         )}
-        <div class="flex w-full gap-4 mt-5">
+        <div class="flex items-center justify-center w-full gap-4 mt-5">
           {!isCaptured() ? (
-            <div class="flex flex-row justify-center items-center gap-7 w-full">
+            <div class="flex flex-row justify-center items-center gap-12 w-full">
               {/* 🔴 Menu Utama */}
               <button
+                onMouseDown={() => setIsActive(true)}
+                onMouseUp={() => setTimeout(() => setIsActive(false), 300)}
+                onMouseLeave={() => setIsActive(false)}
                 onClick={() => {
-                  navigate("/");
+                  setIsActive(true);
                   buttonSound.play();
+                  setTimeout(() => {
+                    navigate("/");
+                  }, 500);
                 }}
                 disabled={isCounting()}
-                class={`btn-geely ${
-                  isCounting() ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                class={`flex w-40 h-40 font-bold transition-all duration-300 active:scale-95 uppercase tracking-widest rounded-[25px]
+      ${isCounting() ? "opacity-50 cursor-not-allowed" : ""}`}
+                style={{
+                  "background-image": `url(${
+                    !isActive() ? btnBackIdle : btnBackActive
+                  })`,
+                  "background-size": "cover",
+                  "background-position": "center",
+                  "background-repeat": "no-repeat",
+                }}
               >
-                Menu Utama
+                {/* Kalau mau tambahin ikon panah di tengah, bisa taruh sini */}
               </button>
 
-              {/* Tombol Ambil Foto */}
+              {/* 🟢 Tombol Ambil Foto */}
               <button
                 onClick={handleCapture}
                 disabled={isCounting()}
@@ -347,7 +381,7 @@ export default function TakePhotoAI() {
                   isCounting() ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
-                Ambil Foto
+                Take Photo
               </button>
             </div>
           ) : photoPreview() ? (

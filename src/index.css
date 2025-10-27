@@ -233,9 +233,9 @@ code {
 
 @layer components {
   .btn-geely {
-    @apply font-bold px-20 py-6 text-[35px] text-black uppercase tracking-widest rounded-[25px]
+    @apply font-bold px-24 py-6 text-[50px] text-black rounded-[25px]
            transition-all duration-300 active:scale-95 min-w-[380px]
-           bg-gradient-to-b from-[#e7ebf0] to-[#8491a3]
+           bg-gradient-to-b from-[#d2d8e1] to-[#76849b]
            shadow-[4px_4px_8px_#b4b9bf,_-4px_-4px_8px_#f5f8fb]
            active:from-[#7188a0] active:to-[#3f4a55] active:shadow-inner active:text-white;
   }
