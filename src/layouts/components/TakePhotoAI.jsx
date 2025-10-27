@@ -266,7 +266,7 @@ export default function TakePhotoAI() {
     <div class="w-full flex flex-col items-center justify-center text-[#000511]">
       <div
         class={`flex flex-col items-center shadow-none px-5 ${styles.fadeIn}`}
-        style={{ "font-family": "AsusFontTitle" }}
+        style={{ "font-family": "InterSemiBold" }}
       >
         {/* <img
           src={logoJudul}
@@ -332,37 +332,20 @@ export default function TakePhotoAI() {
                   buttonSound.play();
                 }}
                 disabled={isCounting()}
-                class={`font-bold px-32 py-10 text-[30px] text-black transition-all duration-300 active:scale-95 uppercase tracking-widest ${
+                class={`btn-geely ${
                   isCounting() ? "opacity-50 cursor-not-allowed" : ""
                 }`}
-                style={{
-                  "background-image": `url(${
-                    !isActive() ? buttonBase : buttonBaseClicked
-                  })`,
-                  "background-size": "cover",
-                  "background-position": "center",
-                  "background-repeat": "no-repeat",
-                  "min-width": "380px",
-                }}
               >
                 Menu Utama
               </button>
-              {/* 🔵 Ambil Foto */}
+
+              {/* Tombol Ambil Foto */}
               <button
                 onClick={handleCapture}
                 disabled={isCounting()}
-                class={`font-bold px-32 py-10 text-[30px] text-black transition-all duration-300 active:scale-95 uppercase tracking-widest ${
+                class={`btn-geely ${
                   isCounting() ? "opacity-50 cursor-not-allowed" : ""
                 }`}
-                style={{
-                  "background-image": `url(${
-                    !isActive() ? buttonBase : buttonBaseClicked
-                  })`,
-                  "background-size": "cover",
-                  "background-position": "center",
-                  "background-repeat": "no-repeat",
-                  "min-width": "380px",
-                }}
               >
                 Ambil Foto
               </button>
@@ -397,14 +380,15 @@ export default function TakePhotoAI() {
               <div class="flex gap-4 w-full">
                 <button
                   onClick={takeNewPhoto}
-                  class="w-full bg-[#212c4a] text-white px-3 py-2 text-[40px] rounded-lg uppercase shadow-md transition-all duration-500 active:scale-75"
+                  class="btn-geely w-full px-16 py-6 text-[35px]"
                 >
                   Take New Photo
                 </button>
+
                 <button
                   onClick={handlePrint}
-                  class="w-full bg-[#212c4a] text-white px-2 py-2 text-[40px] rounded-lg uppercase shadow-md transition-all duration-500 active:scale-75"
                   hidden
+                  class="btn-geely w-full px-16 py-6 text-[35px]"
                 >
                   Print
                 </button>
@@ -438,13 +422,14 @@ export default function TakePhotoAI() {
               <div class="flex gap-4 w-full">
                 <button
                   onClick={handleRetake}
-                  class="w-full bg-[#212c4a] text-white px-3 py-2 text-[40px] rounded-lg uppercase shadow-md transition-all duration-500 active:scale-75"
+                  class="btn-geely w-full px-16 py-6 text-[35px]"
                 >
                   Retake Photo
                 </button>
+
                 <button
                   onClick={handleConfirm}
-                  class="w-full bg-[#212c4a] text-white px-3 py-2 text-[40px] rounded-lg uppercase shadow-md transition-all duration-500 active:scale-75"
+                  class="btn-geely w-full px-16 py-6 text-[35px]"
                 >
                   Generate
                 </button>

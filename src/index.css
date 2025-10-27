@@ -66,7 +66,6 @@ code {
   animation: blueGlow 1.5s ease-in-out infinite;
 }
 
-
 .loader {
   width: 100px;
   height: 100px;
@@ -207,7 +206,7 @@ code {
 
 /* ==== GOLD 3D TEXT (FFB848 → 8F6B2) ==== */
 .text-gold-3d {
-  background: linear-gradient(180deg, #FFB848 500%, #8f6b2f 100%);
+  background: linear-gradient(180deg, #ffb848 500%, #8f6b2f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 4px 4px rgba(0, 0, 0, 0.25),
@@ -230,4 +229,14 @@ code {
 .text-gold-3d.shine {
   background-size: 200%;
   animation: goldShine 2.5s linear infinite;
+}
+
+@layer components {
+  .btn-geely {
+    @apply font-bold px-20 py-6 text-[35px] text-black uppercase tracking-widest rounded-[25px]
+           transition-all duration-300 active:scale-95 min-w-[380px]
+           bg-gradient-to-b from-[#e7ebf0] to-[#8491a3]
+           shadow-[4px_4px_8px_#b4b9bf,_-4px_-4px_8px_#f5f8fb]
+           active:from-[#7188a0] active:to-[#3f4a55] active:shadow-inner active:text-white;
+  }
 }
