@@ -276,7 +276,7 @@ export default function TakePhotoAI() {
       >
         <Show when={!countdown()}>
           <span class="uppercase">
-            {isCaptured() ? "GET READY" : "DO YOU WANT TO USE THIS PHOTO?"}
+            {isCaptured() ? "DO YOU WANT TO USE THIS PHOTO?" : "GET READY"}
           </span>
         </Show>
       </p>
@@ -412,7 +412,7 @@ export default function TakePhotoAI() {
 
                 {/* Kotak Teks */}
                 <div className="flex-1 flex items-center justify-center">
-                  <p className="h-full text-[50px] font-semibold leading-tight tracking-wide text-black text-center bg-white rounded-2xl border-2 border-gray-300 shadow-sm p-6 flex items-center justify-center">
+                  <p className="h-full w-full text-[50px] font-semibold leading-tight tracking-wide text-black text-center bg-white rounded-2xl border-2 border-gray-300 shadow-sm p-6 flex items-center justify-center">
                     SCAN QR CODE
                     <br />
                     TO DOWNLOAD
