@@ -393,7 +393,7 @@ export default function TakePhotoAI() {
               </button>
             </div>
           ) : photoPreview() ? (
-            <div class="flex flex-col gap-4 w-full">
+            <div class="flex flex-col items-center justify-center gap-12 w-full">
               {/* QR Button Section */}
               {/* <button
                 class="bg-[#212c4a] text-white text-[40px] px-3 py-2 rounded-lg shadow-md transition-all duration-500 active:scale-75 uppercase"
