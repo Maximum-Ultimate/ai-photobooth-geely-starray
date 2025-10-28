@@ -271,7 +271,7 @@ export default function TakePhotoAI() {
   return (
     <div class="w-full flex flex-col items-center justify-center">
       <p
-        class="absolute top-40 text-[75px] px-20 text-center tracking-widest leading-20 text-white"
+        class="absolute top-32 text-[75px] px-20 text-center tracking-widest leading-20 text-white"
         style={{ "font-family": "GeelyBold" }}
       >
         <Show when={!countdown() && !photoPreview()}>
@@ -403,9 +403,9 @@ export default function TakePhotoAI() {
               </button> */}
               <div className="flex gap-6 items-stretch h-64">
                 {/* Kotak QR */}
-                <div className="flex-1 flex items-center justify-center bg-white rounded-2xl border-2 border-gray-300 shadow-sm overflow-hidden">
+                <div className="w-1/3 flex items-center justify-center bg-white rounded-2xl border-2 border-gray-300 shadow-sm overflow-hidden">
                   <QRComponent
-                    className=" h-full object-contain rounded-2xl"
+                    className="w-full h-full object-contain rounded-2xl"
                     urlQr={qrUrl()}
                   />
                 </div>
