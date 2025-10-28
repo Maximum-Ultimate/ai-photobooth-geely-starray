@@ -401,7 +401,7 @@ export default function TakePhotoAI() {
               >
                 Show QR
               </button> */}
-              <div className="flex gap-6 items-stretch h-64">
+              <div className="flex gap-6 items-stretch max-w-[500px] h-64">
                 {/* Kotak QR */}
                 <div className="w-1/3 flex items-center justify-center bg-white rounded-2xl border-2 border-gray-300 shadow-sm overflow-hidden">
                   <QRComponent
