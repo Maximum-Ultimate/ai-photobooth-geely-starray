@@ -271,7 +271,7 @@ export default function TakePhotoAI() {
   return (
     <div class="w-full flex flex-col items-center justify-center">
       <p
-        class="absolute top-60 text-[75px] px-20 text-center tracking-widest leading-20 text-white"
+        class="absolute top-40 text-[75px] px-20 text-center tracking-widest leading-20 text-white"
         style={{ "font-family": "GeelyBold" }}
       >
         <Show when={!countdown()}>
@@ -323,7 +323,7 @@ export default function TakePhotoAI() {
             </div>
           )}
           {isLoading() && (
-            <div class="absolute top-1/2 flex flex-col items-center justify-center w-full gap-2 text-white">
+            <div class="absolute top-1/3 mt-40 flex flex-col items-center justify-center w-full gap-2 text-white">
               <span class="loader absolute"></span>
               <span class="animate-pulse">Loading...</span>
             </div>
@@ -403,7 +403,7 @@ export default function TakePhotoAI() {
               </button> */}
               <div className="flex gap-6 items-stretch h-64">
                 {/* Kotak QR */}
-                <div className="w-1/3 flex items-center justify-center bg-white rounded-2xl border-2 border-gray-300 shadow-sm overflow-hidden">
+                <div className="flex-1 flex items-center justify-center bg-white rounded-2xl border-2 border-gray-300 shadow-sm overflow-hidden">
                   <QRComponent
                     className="w-full h-full object-contain rounded-2xl"
                     urlQr={qrUrl()}
@@ -419,6 +419,7 @@ export default function TakePhotoAI() {
                   </p>
                 </div>
               </div>
+
               <div class="flex gap-4 w-full">
                 <button
                   onClick={takeNewPhoto}
@@ -461,17 +462,17 @@ export default function TakePhotoAI() {
                   Female
                 </button>
               </div> */}
-              <div class="flex gap-4 w-full">
+              <div class="flex gap-4 w-full justify-center">
                 <button
                   onClick={handleRetake}
-                  class="btn-geely w-full px-16 py-6 text-[35px]"
+                  class="btn-geely flex-1 max-w-[250px] px-10 py-3 text-[35px]"
                 >
                   Retake Photo
                 </button>
 
                 <button
                   onClick={handleConfirm}
-                  class="btn-geely w-full px-16 py-6 text-[35px]"
+                  class="btn-geely flex-1 max-w-[250px] px-10 py-3 text-[35px]"
                 >
                   Generate
                 </button>
