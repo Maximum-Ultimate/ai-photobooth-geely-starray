@@ -170,7 +170,7 @@ export default function ChooseGenderModel() {
               class="absolute top-[350px] text-[55px] text-center tracking-widest leading-20"
               style={{ "font-family": "GeelyBold" }}
             >
-              <span class="uppercase">Pilih Karakter Mu</span>
+              <span class="uppercase">Choose Your Character</span>
             </p>
             {/* Wrapper foto + tombol */}
             <div class="relative flex items-center justify-center w-full ">
